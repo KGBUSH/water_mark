@@ -105,7 +105,6 @@ def main():
     # summary_op
     # summary_op = tf.summary.merge_all()
     writer = tf.summary.FileWriter(config.summary_save_dir)  # train_summary文件夹
-    # test_writer = tf.summary.FileWriter(config.summary_save_dir)  # train_summary文件夹
 
     # train_op
     global_step = tf.train.get_or_create_global_step()

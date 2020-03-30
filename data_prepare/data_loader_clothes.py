@@ -13,6 +13,7 @@ import pandas as pd
 import numpy as np
 import sys
 from collections import Counter
+
 sys.path.append('../')
 import config
 
@@ -41,7 +42,10 @@ def preprocess(img_path):
 
 
 def preprocess2(img_path):
-    """using cv2.INTER_LINEAR"""
+    """
+    using cv2.INTER_LINEAR
+    因为线上的Opencv的版本是老版本
+    """
     img_cv2 = cv2.imread(img_path)
     # img_cv2 = cv2.resize(img_cv2, dsize=(config.img_w, config.img_h), interpolation=cv2.INTER_NEAREST)
     img_cv2 = cv2.resize(img_cv2, dsize=(config.img_w, config.img_h), interpolation=cv2.INTER_LINEAR)
@@ -232,6 +236,7 @@ class DataGenerator_PN(object):
     用于mask
     后面也改成可以用于logo
     """
+
     def __init__(self,
                  data_dir_p,
                  data_dir_n,
@@ -345,8 +350,7 @@ class DataGenerator_PN(object):
             outputs = {
                 'labels': Y_data,  # (bs)
             }
-            yield (inputs, outputs)
-
+            yield inputs, outputs
 
 
 if __name__ == "__main__":

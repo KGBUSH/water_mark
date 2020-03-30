@@ -19,7 +19,7 @@ img_ch = 3
 
 
 learning_rate = 1e-4
-l2_loss_lambda = 1e-5  # should be very small in under fitting period
+l2_loss_lambda = 1e-6  # should be very small in under fitting period
 
 # log
 LOG_PATH = os.path.join(proj_root_path, 'data/log/')
@@ -28,7 +28,6 @@ LOG_PATH = os.path.join(proj_root_path, 'data/log/')
 print('## project_root_path: ', proj_root_path)
 print('## model_save_dir: ', model_save_dir)
 print('## summary_save_dir: ', summary_save_dir)
-print('## clothes_data_dir: ', clothes_data_dir)
 print('## batchSize =', batch_size, 'learning_rate = ', learning_rate)
 
 
