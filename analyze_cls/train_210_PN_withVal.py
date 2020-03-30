@@ -51,30 +51,30 @@ def main():
         os.mkdir(config.summary_save_dir)
 
     # data_load
-    Data_Gen = data_loader_clothes.DataGenerator_PN(data_dir_p=config.mask_data_dir,
-                                                    data_dir_n=config.clothes_data_dir,
+    data_gen = data_loader_clothes.DataGenerator_PN(data_dir_p=config.jd_data_dir,
+                                                    data_dir_n=config.add_meituan_to_jd_data_dir,
                                                     img_h=config.img_h,
                                                     img_w=config.img_w,
                                                     img_ch=config.img_ch,
                                                     batch_size=config.batch_size
                                                     )
-    Data_Gen_val = data_loader_clothes.DataGenerator_PN(data_dir_p=config.mask_data_eval_dir,
-                                                        data_dir_n=config.image_clothes_eval_dir,
+    data_gen_val = data_loader_clothes.DataGenerator_PN(data_dir_p=config.jd_data_eval_dir,
+                                                        data_dir_n=config.add_meituan_to_jd_data_eval_dir,
                                                         img_h=config.img_h,
                                                         img_w=config.img_w,
                                                         img_ch=config.img_ch,
                                                         batch_size=config.batch_size
                                                         )
-    Data_Gen.build_positive_data()
-    Data_Gen.build_negative_data()
-    Data_Gen_val.build_positive_data()
-    Data_Gen_val.build_negative_data()
-    generator = Data_Gen.next_batch()
-    generator_val = Data_Gen_val.next_batch()
-    print('!!config.mask_data_dir', config.mask_data_dir)
-    print('!!config.clothes_data_dir', config.clothes_data_dir)
-    print('!!config.mask_data_eval_dir', config.mask_data_eval_dir)
-    print('!!config.image_clothes_eval_dir', config.image_clothes_eval_dir)
+    data_gen.build_positive_data()
+    data_gen.build_negative_data()
+    data_gen_val.build_positive_data()
+    data_gen_val.build_negative_data()
+    generator = data_gen.next_batch()
+    generator_val = data_gen_val.next_batch()
+    print('!!config.jd_data_dir', config.jd_data_dir)
+    print('!!config.add_meituan_to_jd_data_dir', config.add_meituan_to_jd_data_dir)
+    print('!!config.jd_data_eval_dir', config.jd_data_eval_dir)
+    print('!!config.add_meituan_to_jd_data_eval_dir', config.add_meituan_to_jd_data_eval_dir)
 
     # define train model
     is_training = tf.placeholder(dtype=tf.bool)

@@ -12,9 +12,9 @@ except ImportError:
 logo: 标签里面1 是穿工服； 2或者0是没穿
 """
 
-img_h = 512  # logo 要用512，精度更好
+img_h = 1024
 # img_h = 256
-img_w = int(img_h * 0.75)  # 384
+img_w = int(img_h / 1.0)
 img_ch = 3
 
 
