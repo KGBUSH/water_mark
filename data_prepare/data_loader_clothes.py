@@ -3,9 +3,9 @@
 工服自拍
 正样本和"没有穿着装备"的负样本
 """
-import matplotlib
-matplotlib.use('TkAgg')
-import matplotlib.pyplot as plt
+# import matplotlib
+# matplotlib.use('TkAgg')
+# import matplotlib.pyplot as plt
 import cv2
 import os
 import random
