@@ -18,7 +18,7 @@ img_w = int(img_h / 1.0)
 img_ch = 3
 
 
-learning_rate = 1e-4
+learning_rate = 0.5 * 1e-4
 l2_loss_lambda = 1e-6  # should be very small in under fitting period
 
 # log

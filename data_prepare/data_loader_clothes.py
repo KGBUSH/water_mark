@@ -3,9 +3,9 @@
 工服自拍
 正样本和"没有穿着装备"的负样本
 """
-# import matplotlib
-# matplotlib.use('TkAgg')
-# import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('TkAgg')
+import matplotlib.pyplot as plt
 import cv2
 import os
 import random
@@ -65,11 +65,12 @@ def preprocess_pad(img_path):
         assert config.img_w == config.img_h
         h, w, _ = img_cv0.shape
         m = max(w, h)
-        ratio = 0.875 * config.img_w / m
+        ratio = 1.0 * config.img_w / m
         new_w, new_h = int(ratio * w), int(ratio * h)
         assert new_w > 0 and new_h > 0
         # 使用cv2.resize时，参数输入是 宽×高×通道
-        img_cv1 = cv2.resize(img_cv0, dsize=(new_w, new_h), interpolation=cv2.INTER_LINEAR_EXACT)
+        # img_cv1 = cv2.resize(img_cv0, dsize=(new_w, new_h), interpolation=cv2.INTER_LINEAR_EXACT)
+        img_cv1 = cv2.resize(img_cv0, dsize=(new_w, new_h), interpolation=cv2.INTER_LINEAR)
 
         # 2. 把图片进行填充，填充到256 256
         W, H = config.img_w, config.img_w
@@ -82,7 +83,7 @@ def preprocess_pad(img_path):
         if left + right + new_w < W:
             right += 1
         pad_image = cv2.copyMakeBorder(img_cv1, top, bottom, left, right, cv2.BORDER_CONSTANT, value=[0, 0, 0])
-        if pad_image.shape[0] != 256 or pad_image.shape[1] != 256:
+        if pad_image.shape[0] != config.img_h or pad_image.shape[1] != config.img_w:
             print('!!!image padding error:', pad_image.shape)
         return pad_image
     except:
@@ -298,7 +299,8 @@ class DataGenerator_PN(object):
             # load one image and its label
             img_idx = self.indexes_positive[self.cur_index_positive]
             img_path = self.img_fn_list_positive[img_idx]
-            img_data = preprocess2(img_path)
+            # img_data = preprocess2(img_path)
+            img_data = preprocess_pad(img_path)
             # parse label
             label_data = 1
 
@@ -318,7 +320,8 @@ class DataGenerator_PN(object):
             # load one image and its label
             img_idx = self.indexes_negative[self.cur_index_negative]
             img_path = self.img_fn_list_negative[img_idx]
-            img_data = preprocess2(img_path)
+            # img_data = preprocess2(img_path)
+            img_data = preprocess_pad(img_path)
             # parse label
             label_data = 0
 
@@ -356,10 +359,14 @@ class DataGenerator_PN(object):
 if __name__ == "__main__":
     # load_test()
 
-    Data_Gen = DataGeneratorClothes2(data_dir=config.clothes_data_dir,
-                                     img_h=config.img_h,
-                                     img_w=config.img_w,
-                                     img_ch=config.img_ch,
-                                     batch_size=config.batch_size
-                                     )
-    Data_Gen.build_data()
+    # Data_Gen = DataGeneratorClothes2(data_dir=config.clothes_data_dir,
+    #                                  img_h=config.img_h,
+    #                                  img_w=config.img_w,
+    #                                  img_ch=config.img_ch,
+    #                                  batch_size=config.batch_size
+    #                                  )
+    # Data_Gen.build_data()
+
+    path = '/Users/apple/PycharmProjects/water_mark/data/图片(1)/2.jpg'
+    path = '/Users/apple/PycharmProjects/water_mark/data/图片(1)/3.jpg'
+    preprocess_pad(img_path=path)

@@ -15,7 +15,7 @@ model_save_dir = os.path.join(proj_root_path, 'run_output/watermark_run_output03
 summary_save_dir = os.path.join(proj_root_path, 'train_summary/watermark_train_summary0330/')
 
 # training
-batch_size = 4
+batch_size = 8
 train_steps = 20000
 save_n_iters = 5000
 
